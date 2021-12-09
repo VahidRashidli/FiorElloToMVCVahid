@@ -1,5 +1,37 @@
 $(document).ready(function () {
 
+    let count = 4;
+    $(document).on("click", "#load", function () {                
+        $.ajax({
+            method: "GET",
+            url: "GetPartial/" + count,
+            success: function (response) {
+                count += 2;
+                for (let item of response) {
+                    var content = `
+                      <div class="col-sm-6 col-md-4 col-lg-3 mt-3">
+            <div class="product-item text-center" data-id="@product.Category.Name.ToLower()">
+                <div class="img">
+                    <a href="">
+                        <img src="/img/${item.imageName}" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="title mt-3">
+                    <h6>${item.name}</h6>
+                </div>
+                <div class="price">
+                    <span class="text-black-50">Add to cart</span>
+                    <span class="text-black-50">$${item.price}</span>
+                </div>
+            </div>
+        </div>
+`;
+                    $("#product").append(content);
+                }
+            }
+        })
+        
+    })
     // HEADER
 
     $(document).on('click', '#search', function () {
@@ -147,4 +179,5 @@ $(document).ready(function () {
             }
         );
       });
+   
 })

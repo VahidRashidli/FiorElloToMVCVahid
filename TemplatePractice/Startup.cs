@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using TemplatePractice.DAL;
 
 namespace TemplatePractice
@@ -23,7 +24,10 @@ namespace TemplatePractice
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().AddNewtonsoftJson(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                }
+            );
             services.AddDbContext<AppDbContext>(options => {
                 options.UseSqlServer(_config.GetConnectionString("Default"));
             });

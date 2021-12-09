@@ -19,8 +19,21 @@ namespace TemplatePractice.Controllers
         }
         public IActionResult Index()
         {
+       
+
             AboutSection aboutSection = _context.AboutSections.FirstOrDefault();
             ICollection<InfoList> infoLists = _context.InfoLists.ToList();
+            _context.Products.AddRange(new List<Product>()
+            {
+                new Product(){Name="Majesty Palm",ImageName="shop-13-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Popular").ToList()[0]},
+                new Product(){Name="Majesty Palm",ImageName="shop-12-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Winter").ToList()[0]},
+                new Product(){Name="Majesty Palm",ImageName="shop-11-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Winter").ToList()[0]},
+                new Product(){Name="Majesty Palm",ImageName="shop-10-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Various").ToList()[0]},
+                new Product(){Name="Majesty Palm",ImageName="shop-9-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Various").ToList()[0]},
+                new Product(){Name="Majesty Palm",ImageName="shop-8-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Exotic").ToList()[0]},
+                new Product(){Name="Majesty Palm",ImageName="shop-7-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Exotic").ToList()[0]},
+            });
+            _context.SaveChanges();
             ICollection<Product> products = _context.Products.Include(p=>p.Category).ToList();
             ICollection<Category> categories = _context.Categories.OrderBy(x => x.Order).ToList();
             Subscribe subscribe = _context.Subscribes.FirstOrDefault();
