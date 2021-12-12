@@ -70,7 +70,7 @@
                     </ul>
                 </div>
             </div>
-            <partial name="_ProductPartial" />
+            @await Component.InvokeAsync("Product") 
         </div>
     </section>
 
@@ -174,67 +174,34 @@
             <div class="row py-5">
                 <div class="offset-lg-3 col-lg-6">
                     <div class="section-title">
-                        <h1>From our Blog</h1>
+                        <h1>@Model.Blog.Title</h1>
                         <p class="text-black-50">
-                            A perfect blend of creativity, energy, communication, happiness and
-                            love. Let us arrange
-                            a smile for you.
+                            @Model.Blog.Description
                         </p>
                     </div>
                 </div>
             </div>
             <div class="row pb-5">
-                <div class="col-md-6 col-lg-4">
-                    <div class="item">
-                        <div class="img position-relative">
-                            <img src="~/img/blog-feature-img-1.jpg" class="img-fluid" alt="">
-                            <div class="date rounded bg-light position-absolute py-1 px-2">
-                                <span>29.12.2019</span>
+                @foreach (BlogPicture blogPicture in Model.BlogPictures)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="item">
+                            <div class="img position-relative">
+                                <img src="~/img/@blogPicture.Image" class="img-fluid" alt="">
+                                <div class="date rounded bg-light position-absolute py-1 px-2">
+                                    <span>@blogPicture.Date.ToString("dd.MM.yyyy")</span>
+                                </div>
+                            </div>
+                            <div class="text mt-3 text-center px-5">
+                                <h5>@blogPicture.Title</h5>
+                                <p class="text-black-50">
+                                    @blogPicture.Description
+                                </p>
                             </div>
                         </div>
-                        <div class="text mt-3 text-center px-5">
-                            <h5>Flower Power</h5>
-                            <p class="text-black-50">
-                                Class aptent taciti sociosqu ad litora torquent per conubia
-                                nostra, per
-                            </p>
-                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="item">
-                        <div class="img position-relative">
-                            <img src="~/img/blog-feature-img-3.jpg" class="img-fluid" alt="">
-                            <div class="date rounded bg-light position-absolute py-1 px-2">
-                                <span>29.12.2019</span>
-                            </div>
-                        </div>
-                        <div class="text mt-3 text-center px-5">
-                            <h5>Local Florists</h5>
-                            <p class="text-black-50">
-                                Class aptent taciti sociosqu ad litora torquent per conubia
-                                nostra, per
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="item">
-                        <div class="img position-relative">
-                            <img src="~/img/blog-feature-img-4.jpg" class="img-fluid" alt="">
-                            <div class="date rounded bg-light position-absolute py-1 px-2">
-                                <span>29.12.2019</span>
-                            </div>
-                        </div>
-                        <div class="text mt-3 text-center px-5">
-                            <h5>Flower Beauty</h5>
-                            <p class="text-black-50">
-                                Class aptent taciti sociosqu ad litora torquent per conubia
-                                nostra, per
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                }
+              
             </div>
         </div>
     </section>
@@ -242,50 +209,7 @@
     <!-- BLOG END -->
     <!-- SAY START -->
 
-    <section id="say">
-        <div class="container">
-            <div class="row py-5 justify-content-center">
-                <div class="col-md-8 col-xl-6">
-                    <div class="owl-carousel say">
-                        <div>
-                            <div class="item text-center">
-                                <div class="img d-flex justify-content-center">
-                                    <img src="~/img/testimonial-img-1.png" alt="">
-                                </div>
-                                <div class="text text-muted pt-3 pb-5">
-                                    <i>
-                                        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus
-                                        lingua.
-                                    </i>
-                                </div>
-                                <div class="author">
-                                    <h6>Anna Barnes</h6>
-                                    <p class="text-black-50">Florist</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="item text-center">
-                                <div class="img d-flex justify-content-center">
-                                    <img src="~/img/testimonial-img-2.png" alt="">
-                                </div>
-                                <div class="text text-muted pt-3 pb-5">
-                                    <i>
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                                        ligula eget.
-                                    </i>
-                                </div>
-                                <div class="author">
-                                    <h6>Jasmine White</h6>
-                                    <p class="text-black-50">Florist</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   @await Component.InvokeAsync("Say");
 
     <!-- SAY END -->
     <!-- INSTAGRAM START -->

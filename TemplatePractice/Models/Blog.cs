@@ -6,11 +6,16 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace TemplatePractice.Models
-{   
-  
-    public class BaseEntity
+{
+    public class Blog : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string Title { get; set; }
+        [Required]
+        [MaxLength(300)]
+        public string Description { get; set; }
+      
+
     }
 }

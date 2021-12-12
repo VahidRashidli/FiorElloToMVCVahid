@@ -15,5 +15,7 @@ namespace TemplatePractice.ViewModels
         public Subscribe Subscribe { get; set; }
         public ExpertSection ExpertSection { get; set; }
         public ICollection<ExpertImage> ExpertImages { get; set; }
+        public Blog Blog { get; set; }
+        public ICollection<BlogPicture> BlogPictures { get; set; }
     }
 }

@@ -19,27 +19,74 @@ namespace TemplatePractice.Controllers
         }
         public IActionResult Index()
         {
-       
-
             AboutSection aboutSection = _context.AboutSections.FirstOrDefault();
             ICollection<InfoList> infoLists = _context.InfoLists.ToList();
-            _context.Products.AddRange(new List<Product>()
-            {
-                new Product(){Name="Majesty Palm",ImageName="shop-13-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Popular").ToList()[0]},
-                new Product(){Name="Majesty Palm",ImageName="shop-12-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Winter").ToList()[0]},
-                new Product(){Name="Majesty Palm",ImageName="shop-11-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Winter").ToList()[0]},
-                new Product(){Name="Majesty Palm",ImageName="shop-10-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Various").ToList()[0]},
-                new Product(){Name="Majesty Palm",ImageName="shop-9-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Various").ToList()[0]},
-                new Product(){Name="Majesty Palm",ImageName="shop-8-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Exotic").ToList()[0]},
-                new Product(){Name="Majesty Palm",ImageName="shop-7-img.jpg",Price=256,Category=_context.Categories.Where(c=>c.Name=="Exotic").ToList()[0]},
-            });
-            _context.SaveChanges();
-            ICollection<Product> products = _context.Products.Include(p=>p.Category).ToList();
+
+            #region Footer
+            //_context.Footers.AddRange(new Footer
+            //{
+            //    FacebookLink = "https://www.facebook.com/shamilzada.bakhtiyar",
+            //    LinkedInLink = "https://www.linkedin.com/in/bakhtiyar-shamilzada-145159185",
+            //    Image = "footer-bottom-1.png"
+            //});
+            //FooterCategory footerCategory1 = new FooterCategory { Name = "Customer Service" };
+            //FooterCategory footerCategory2 = new FooterCategory { Name = "COMPANY" };
+            //FooterCategory footerCategory3 = new FooterCategory { Name = "SOCIAL MEDIA" };
+            // FooterCategory footerCategory4 = new FooterCategory { Name = "ARCHIVE" };
+            //_context.FooterCategories.AddRange(footerCategory1, footerCategory2,footerCategory3,footerCategory4);
+            //_context.FooterCategorySections.AddRange(
+            //    new FooterCategorySection { Name = "Help & Contact Us", FooterCategory =footerCategory1 ,Link="" },
+            //     new FooterCategorySection { Name = "Returns & Refunds", FooterCategory = footerCategory1, Link = "" },
+            //      new FooterCategorySection { Name = "Online Stores", FooterCategory = footerCategory1, Link = "" },
+            //       new FooterCategorySection { Name = "Terms & Conditions", FooterCategory = footerCategory1, Link = "" },
+
+            //       new FooterCategorySection { Name = "About Us", FooterCategory = footerCategory2, Link = "" },
+            //       new FooterCategorySection { Name = "Blog", FooterCategory = footerCategory2, Link = "" },
+            //       new FooterCategorySection { Name = "Order Tracking", FooterCategory = footerCategory2, Link = "" },
+            //       new FooterCategorySection { Name = "FAQ Page", FooterCategory = footerCategory2, Link = "" },
+            //       new FooterCategorySection { Name = "Contact Us", FooterCategory = footerCategory2, Link = "" },
+            //       new FooterCategorySection { Name = "Login", FooterCategory = footerCategory2, Link = "" },
+
+            //       new FooterCategorySection { Name = "Twitter", FooterCategory = footerCategory3, Link = "" },
+            //       new FooterCategorySection { Name = "Instagram", FooterCategory = footerCategory3, Link = "" },
+            //       new FooterCategorySection { Name = "Tumblr", FooterCategory = footerCategory3, Link = "" },
+            //       new FooterCategorySection { Name = "Pinterest", FooterCategory = footerCategory3, Link = "" },
+
+            //       new FooterCategorySection { Name = "Designer Shoes", FooterCategory = footerCategory4, Link = "" },
+            //       new FooterCategorySection { Name = "Gallery", FooterCategory = footerCategory4, Link = "" },
+            //       new FooterCategorySection { Name = "Pricing", FooterCategory = footerCategory4, Link = "" },
+            //       new FooterCategorySection { Name = "Feature Index", FooterCategory = footerCategory4, Link = "" },
+            //       new FooterCategorySection { Name = "Login", FooterCategory = footerCategory4, Link = "" },
+            //       new FooterCategorySection { Name = "Help & Support", FooterCategory = footerCategory4, Link = "" }
+
+            //    ); ;
+            //_context.SaveChanges();
+            #endregion
+            #region AddingBlogAndSaySections
+            //_context.Blogs.Add(new Blog { Title = "From our Blog", Description = "A perfect blend of creativity, energy, communication, happiness and love. Let us arrange a smile for you." });
+            //_context.BlogPictures.AddRange(
+            //    new BlogPicture { Date = DateTime.Now, Description = "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per", Title = "Flower Power", Image = "blog-feature-img-1.jpg" },
+            //    new BlogPicture { Date = DateTime.Now, Description = "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per", Title = "Local Florists", Image = "blog-feature-img-3.jpg" },
+            //     new BlogPicture { Date = DateTime.Now, Description = "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per", Title = "Flower Beauty", Image = "blog-feature-img-4.jpg" }
+            //    );
+            //_context.SaySections.AddRange(
+            //    new SaySection { Image = "testimonial-img-1.png", Description = "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus lingua.", PersonName = "Anna Barnes", Profession = "Florist" },
+            //    new SaySection { Image = "testimonial-img-2.png", Description = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget.", PersonName = "Jasmine White", Profession = "Florist" }
+            //    );
+            //_context.SaveChanges();
+            #endregion
+            ICollection<Product> products = _context.Products.Include(p=>p.Category).Take(8).ToList();
             ICollection<Category> categories = _context.Categories.OrderBy(x => x.Order).ToList();
             Subscribe subscribe = _context.Subscribes.FirstOrDefault();
             ExpertSection expertSection = _context.ExpertSections.FirstOrDefault();
             ICollection<ExpertImage> expertImages = _context.ExpertImages.OrderBy(i=>i.Order).ToList();
-            return View(new HomeIndexViewModel {AboutSection=aboutSection,InfoLists=infoLists,Categories=categories,Products=products,Subscribe=subscribe,ExpertImages=expertImages,ExpertSection=expertSection });
+            Blog blog = _context.Blogs.FirstOrDefault();
+            ICollection<BlogPicture> blogPictures = _context.BlogPictures.ToList();
+            return View(new HomeIndexViewModel 
+            {AboutSection=aboutSection,InfoLists=infoLists,Categories=categories,
+                Products=products,Subscribe=subscribe,ExpertImages=expertImages,
+                ExpertSection=expertSection,Blog=blog, BlogPictures=blogPictures
+            });
         }
     }
 }

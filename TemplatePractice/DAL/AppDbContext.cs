@@ -20,5 +20,11 @@ namespace TemplatePractice.DAL
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<ExpertSection> ExpertSections { get; set; }
         public DbSet<ExpertImage> ExpertImages { get; set; }
+        public DbSet<Footer> Footers { get; set; }
+        public DbSet<FooterCategory> FooterCategories { get; set; }
+        public DbSet<FooterCategorySection> FooterCategorySections { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogPicture> BlogPictures { get; set; }
+        public DbSet<SaySection> SaySections { get; set; }
     }
 }

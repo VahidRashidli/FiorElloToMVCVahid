@@ -33,6 +33,7 @@ namespace TemplatePractice
             });
         }
 
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -45,7 +46,7 @@ namespace TemplatePractice
 
             app.UseEndpoints(configure =>
             {
-                configure.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                configure.MapControllerRoute("default", "{controller=Home}/{action=Index}/{count?}");
             });
         }
     }
