@@ -1,5 +1,19 @@
 $(document).ready(function () {
+    $(document).on("keyup", "#input-search", function ()
+    {
+        let str = $(this).val();
+        $.ajax({
+            method: "Get",
+            url: "Product/Search?searchedStr=" + str,
+            success: function (res) {
+                $(".search__container li:not(:first-child)").detach()
+                $(".search__container").append(res);
+                
+            }
+        }
 
+        )
+    });
     let count = 4;
     $(document).on("click", "#load", function () {                
         $.ajax({

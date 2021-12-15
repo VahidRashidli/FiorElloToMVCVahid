@@ -75,6 +75,20 @@ namespace TemplatePractice.Controllers
             //    );
             //_context.SaveChanges();
             #endregion
+            #region Adding Instagram Section
+            //_context.InstagramSections.Add(new InstagramSection { Title = "#FIORELLO" });
+            //_context.InstagramSectionPictures.AddRange(
+            //    new InstagramSectionPicture { CreatedDate = DateTime.Now, ImageName = "instagram1.jpg" },
+            //    new InstagramSectionPicture { CreatedDate = DateTime.Now, ImageName = "instagram2.jpg" },
+            //    new InstagramSectionPicture { CreatedDate = DateTime.Now, ImageName = "instagram3.jpg" },
+            //    new InstagramSectionPicture { CreatedDate = DateTime.Now, ImageName = "instagram4.jpg" },
+            //    new InstagramSectionPicture { CreatedDate = DateTime.Now, ImageName = "instagram5.jpg" },
+            //    new InstagramSectionPicture { CreatedDate = DateTime.Now, ImageName = "instagram6.jpg" },
+            //    new InstagramSectionPicture { CreatedDate = DateTime.Now, ImageName = "instagram7.jpg" },
+            //    new InstagramSectionPicture { CreatedDate = DateTime.Now, ImageName = "instagram8.jpg" }
+            //    );
+            
+            #endregion
             ICollection<Product> products = _context.Products.Include(p=>p.Category).Take(8).ToList();
             ICollection<Category> categories = _context.Categories.OrderBy(x => x.Order).ToList();
             Subscribe subscribe = _context.Subscribes.FirstOrDefault();

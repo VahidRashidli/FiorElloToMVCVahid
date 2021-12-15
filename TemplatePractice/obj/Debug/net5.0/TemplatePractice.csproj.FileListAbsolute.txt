@@ -149,3 +149,5 @@ C:\Users\User\OneDrive\Рабочий стол\C#Practise\TemplatePractice\obj\D
 C:\Users\User\OneDrive\Рабочий стол\C#Practise\TemplatePractice\obj\Debug\net5.0\Razor\Views\Shared\Components\Product\Default.cshtml.g.cs
 C:\Users\User\OneDrive\Рабочий стол\C#Practise\TemplatePractice\obj\Debug\net5.0\Razor\Views\Shared\Components\Footer\Default.cshtml.g.cs
 C:\Users\User\OneDrive\Рабочий стол\C#Practise\TemplatePractice\obj\Debug\net5.0\Razor\Views\Shared\Components\Say\Default.cshtml.g.cs
+C:\Users\User\OneDrive\Рабочий стол\C#Practise\TemplatePractice\obj\Debug\net5.0\Razor\Views\Shared\_ProductSearchPartial.cshtml.g.cs
+C:\Users\User\OneDrive\Рабочий стол\C#Practise\TemplatePractice\obj\Debug\net5.0\Razor\Views\Shared\Components\InstagramSection\Default.cshtml.g.cs

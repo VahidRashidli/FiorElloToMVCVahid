@@ -38,6 +38,20 @@ namespace TemplatePractice.Controllers
             
             return Json(products);
         }
-        
+        public async Task<IActionResult> Search(string searchedStr)
+        {
+            if (string.IsNullOrWhiteSpace(searchedStr))
+            {
+                return PartialView("_ProductSearchPartial", new List<Product>());
+            }
+            List<Product> products = await _context.Products
+                .Where(p => p.Name.ToLower().StartsWith(searchedStr.ToLower())).Take(5).ToListAsync();
+            if (products.Count==0)
+            {
+                ViewBag.ProductCount = 0;
+            }
+            return PartialView("_ProductSearchPartial",products);
+        }
+
     }
 }

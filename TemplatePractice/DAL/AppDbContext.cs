@@ -26,5 +26,7 @@ namespace TemplatePractice.DAL
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogPicture> BlogPictures { get; set; }
         public DbSet<SaySection> SaySections { get; set; }
+        public DbSet<InstagramSection> InstagramSections { get; set; }
+        public DbSet<InstagramSectionPicture> InstagramSectionPictures { get; set; }
     }
 }

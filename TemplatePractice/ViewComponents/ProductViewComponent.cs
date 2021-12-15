@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TemplatePractice.DAL;
 using TemplatePractice.Models;
 
@@ -14,9 +16,9 @@ namespace TemplatePractice
         {
             _context = context;
         }
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            ICollection<Product> products = _context.Products.Take(8).ToList();
+            ICollection<Product> products = await _context.Products.Take(8).ToListAsync();
             return View(products);
         }
     }
