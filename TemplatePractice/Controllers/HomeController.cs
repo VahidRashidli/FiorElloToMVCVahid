@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TemplatePractice.DAL;
@@ -18,10 +19,9 @@ namespace TemplatePractice.Controllers
             _context = context;
         }
         public IActionResult Index()
-        {
+        {                       
             AboutSection aboutSection = _context.AboutSections.FirstOrDefault();
             ICollection<InfoList> infoLists = _context.InfoLists.ToList();
-
             #region Footer
             //_context.Footers.AddRange(new Footer
             //{

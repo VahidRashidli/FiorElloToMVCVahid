@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    for (let el of document.querySelectorAll(".addBasket")) {
+        el.addEventListener("click", addBasket);
+    }
     $(document).on("keyup", "#input-search", function ()
     {
         let str = $(this).val();
@@ -195,3 +198,36 @@ $(document).ready(function () {
       });
    
 })
+function addBasket(e) {
+    let id = e.target.getAttribute("data-id");
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "Product/AddToBasket?id=" + id);
+    xhr.send();
+    xhr.onload = (res) => {        
+        if (xhr.status === 200) {
+            let count = 0;            
+            for (let product of JSON.parse(xhr.response)) {
+                count += product["count"];
+            }
+            $("#countOfProducts").text(count)
+        }
+    }
+
+}
+window.addEventListener('DOMContentLoaded', addBasketWhenDOMLoaded);
+function addBasketWhenDOMLoaded() {
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "Product/GetBasket" );
+    xhr.send();
+    xhr.onload = (res) => {
+        if (xhr.status === 200) {
+            let count = 0;            
+            for (let product of JSON.parse(xhr.response)) {
+                count += product["count"];
+            }
+            $("#countOfProducts").text(count)
+        }
+    }
+
+}

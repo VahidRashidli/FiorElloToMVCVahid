@@ -24,6 +24,7 @@ namespace TemplatePractice
         }
         public void ConfigureServices(IServiceCollection services)
         {
+           
             services.AddMvc().AddNewtonsoftJson(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }
@@ -40,6 +41,7 @@ namespace TemplatePractice
             {
                 app.UseDeveloperExceptionPage();
             }
+           
             app.UseStaticFiles();
 
             app.UseRouting();
