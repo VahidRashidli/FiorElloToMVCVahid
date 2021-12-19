@@ -9,7 +9,7 @@ using TemplatePractice.DAL;
 
 namespace TemplatePractice.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(IAppDbContext))]
     [Migration("20211209174013_CreatedFooter")]
     partial class CreatedFooter
     {

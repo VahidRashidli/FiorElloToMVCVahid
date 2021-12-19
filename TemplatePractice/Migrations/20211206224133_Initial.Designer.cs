@@ -8,7 +8,7 @@ using TemplatePractice.DAL;
 
 namespace TemplatePractice.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(IAppDbContext))]
     [Migration("20211206224133_Initial")]
     partial class Initial
     {

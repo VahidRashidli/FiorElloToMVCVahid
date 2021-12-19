@@ -11,8 +11,8 @@ namespace TemplatePractice
 {
     public class ProductViewComponent:ViewComponent
     {
-        private AppDbContext _context;
-        public ProductViewComponent(AppDbContext context)
+        private IAppDbContext _context;
+        public ProductViewComponent(IAppDbContext context)
         {
             _context = context;
         }

@@ -9,7 +9,7 @@ using TemplatePractice.DAL;
 
 namespace TemplatePractice.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(IAppDbContext))]
     [Migration("20211207201636_CreatedExpertSection")]
     partial class CreatedExpertSection
     {

@@ -13,8 +13,8 @@ namespace TemplatePractice.Controllers
 {
     public class HomeController : Controller
     {
-        private AppDbContext _context;
-        public HomeController(AppDbContext context)
+        private IAppDbContext _context;
+        public HomeController(IAppDbContext context)
         {
             _context = context;
         }

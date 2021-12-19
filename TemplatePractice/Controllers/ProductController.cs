@@ -17,8 +17,8 @@ namespace TemplatePractice.Controllers
     public class ProductController : Controller
     {
 
-            private AppDbContext _context;
-            public ProductController(AppDbContext context)
+            private IAppDbContext _context;
+            public ProductController(IAppDbContext context)
             {
                 _context = context;
             }
@@ -71,9 +71,9 @@ namespace TemplatePractice.Controllers
                     {
                         basketProduct.ImageName = product.ImageName;
                         basketProduct.Name = product.Name;
-                        basketProduct.Price = product.Price;                        
-                    }
-                    
+                        basketProduct.Price = product.Price;
+                        basketProduct.Category = product.Category;
+                    }                                     
                 }              
                 Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
             }

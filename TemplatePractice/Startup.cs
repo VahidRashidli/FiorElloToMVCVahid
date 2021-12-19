@@ -22,6 +22,7 @@ namespace TemplatePractice
         {
             _config = configuration;
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
            
@@ -32,6 +33,7 @@ namespace TemplatePractice
             services.AddDbContext<AppDbContext>(options => {
                 options.UseSqlServer(_config.GetConnectionString("Default"));
             });
+            services.AddScoped<IAppDbContext, AppDbContext>();
         }
 
 
@@ -45,6 +47,13 @@ namespace TemplatePractice
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}"
+                );
+            });
 
             app.UseEndpoints(configure =>
             {

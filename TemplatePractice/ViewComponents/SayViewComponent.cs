@@ -9,9 +9,9 @@ namespace TemplatePractice.ViewComponents
 {
     public class SayViewComponent:ViewComponent
     {
-        private AppDbContext _context;
+        private IAppDbContext _context;
 
-        public SayViewComponent(AppDbContext context)
+        public SayViewComponent(IAppDbContext context)
         {
             _context = context;
         }

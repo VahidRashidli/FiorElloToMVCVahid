@@ -12,8 +12,8 @@ namespace TemplatePractice.ViewComponents
 {
     public class FooterViewComponent:ViewComponent
     {
-        private AppDbContext _context;
-        public FooterViewComponent(AppDbContext context)
+        private IAppDbContext _context;
+        public FooterViewComponent(IAppDbContext context)
         {
             _context = context;
         }

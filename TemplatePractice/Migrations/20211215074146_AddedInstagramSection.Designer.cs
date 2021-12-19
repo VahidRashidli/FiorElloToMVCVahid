@@ -9,7 +9,7 @@ using TemplatePractice.DAL;
 
 namespace TemplatePractice.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(IAppDbContext))]
     [Migration("20211215074146_AddedInstagramSection")]
     partial class AddedInstagramSection
     {
