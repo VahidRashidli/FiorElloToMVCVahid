@@ -60,7 +60,7 @@ namespace TemplatePractice.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            bool isExist = await _context.Categories.AnyAsync(c=>c.Id==category.Id);
+            bool isExist = await _context.Categories.AnyAsync(c=>c.Id==id);
             if (!isExist)
             {
                 return NotFound();
