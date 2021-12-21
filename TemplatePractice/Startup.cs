@@ -33,7 +33,6 @@ namespace TemplatePractice
             services.AddDbContext<AppDbContext>(options => {
                 options.UseSqlServer(_config.GetConnectionString("Default"));
             });
-            services.AddScoped<IAppDbContext, AppDbContext>();
         }
 
 

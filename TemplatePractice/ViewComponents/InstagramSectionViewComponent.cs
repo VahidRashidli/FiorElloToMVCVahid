@@ -12,9 +12,9 @@ namespace TemplatePractice.ViewComponents
 {
     public class InstagramSectionViewComponent:ViewComponent
     {
-        private IAppDbContext _context;
+        private AppDbContext _context;
 
-        public InstagramSectionViewComponent(IAppDbContext context)
+        public InstagramSectionViewComponent(AppDbContext context)
         {
             _context = context;
         }

@@ -18,7 +18,6 @@ namespace TemplatePractice.Areas.Admin.Controllers
         {
             _context = context;
         }
-       
         public async Task<IActionResult> Index()
         {
             return View(await _context.Categories.OrderBy(c=>c.Order).ToListAsync());
@@ -32,6 +31,10 @@ namespace TemplatePractice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Category category)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             await _context.Categories.AddAsync(category);
             await _context.SaveChangesAsync();
             
@@ -41,6 +44,30 @@ namespace TemplatePractice.Areas.Admin.Controllers
         public async Task<IActionResult> Detail(int id)
         {            
             return View(await _context.Categories.FindAsync(id));
+        }
+        public async Task<IActionResult> Update(int id)
+        {
+            return View(await _context.Categories.FindAsync(id));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(int id,Category category)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            if (id!=category.Id)
+            {
+                return BadRequest();
+            }
+            bool isExist = await _context.Categories.AnyAsync(c=>c.Id==category.Id);
+            if (!isExist)
+            {
+                return NotFound();
+            }
+            _context.Categories.Update(category);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

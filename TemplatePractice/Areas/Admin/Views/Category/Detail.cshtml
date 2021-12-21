@@ -14,12 +14,16 @@
                                 <th>
                                     Category Name
                                 </th>
+                                <th>
+                                    Category Description
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>@Model.Id</td>
                                 <td>@Model.Name</td>
+                                <td>@Html.Raw(Model.Description)</td>
                             </tr>
                         </tbody>
                     </table>

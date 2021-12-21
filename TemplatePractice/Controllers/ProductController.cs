@@ -17,8 +17,8 @@ namespace TemplatePractice.Controllers
     public class ProductController : Controller
     {
 
-            private IAppDbContext _context;
-            public ProductController(IAppDbContext context)
+            private AppDbContext _context;
+            public ProductController(AppDbContext context)
             {
                 _context = context;
             }

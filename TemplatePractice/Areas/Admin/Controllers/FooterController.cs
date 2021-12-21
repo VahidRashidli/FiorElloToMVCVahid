@@ -36,6 +36,10 @@ namespace TemplatePractice.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Footer footer)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             _context.Footers.FirstOrDefault().FacebookLink = footer.FacebookLink;
             _context.Footers.FirstOrDefault().LinkedInLink= footer.LinkedInLink;
             await _context.SaveChangesAsync();

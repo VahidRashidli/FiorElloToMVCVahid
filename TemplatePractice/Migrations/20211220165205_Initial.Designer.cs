@@ -9,9 +9,9 @@ using TemplatePractice.DAL;
 
 namespace TemplatePractice.Migrations
 {
-    [DbContext(typeof(IAppDbContext))]
-    [Migration("20211212110809_DeletedTrash")]
-    partial class DeletedTrash
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20211220165205_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,6 +95,9 @@ namespace TemplatePractice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -225,6 +228,40 @@ namespace TemplatePractice.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("InfoLists");
+                });
+
+            modelBuilder.Entity("TemplatePractice.Models.InstagramSection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title")
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InstagramSections");
+                });
+
+            modelBuilder.Entity("TemplatePractice.Models.InstagramSectionPicture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InstagramSectionPictures");
                 });
 
             modelBuilder.Entity("TemplatePractice.Models.Product", b =>

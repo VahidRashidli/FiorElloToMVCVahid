@@ -5,21 +5,20 @@
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Create a Category</h4>
-                        <form class="forms-sample" method="post" asp-controller="Category" asp-action="Create">
+                        <h4 class="card-title">Update a Category</h4>
+                        <form class="forms-sample" method="post" asp-controller="Category" asp-action="Update">
                             <div class="form-group">
                                 <label asp-for="Name">Name</label>
-                                <input type="text" class="form-control" asp-for="Name" placeholder="Name">
+                                <input type="text" class="form-control" asp-for="Name" value="@Model.Name" placeholder="Name">
                                 <span class="text-danger" asp-validation-for="Name"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Order">Order</label>
-                                <input type="number" class="form-control" asp-for="Order" min="1" placeholder="Order">
-                                <span class="text-danger" asp-validation-for="Order"></span>
+                                <input type="number" class="form-control" value="@Model.Order" asp-for="Order" min="1" placeholder="Order">
                             </div>
                             <div class="form-group">
                                 <label asp-for="Description">Description</label>
-                                <textarea asp-for="Description"></textarea>
+                                <textarea value="@Model.Description" asp-for="Description"></textarea>
                                 <span class="text-danger" asp-validation-for="Description"></span>
                             </div>
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
@@ -31,17 +30,19 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
-    <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#Description'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-    <partial name="_ValidationScripts" />
+    <partial name="_ValidationScripts">
+        <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#Description'))
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
 }
+
