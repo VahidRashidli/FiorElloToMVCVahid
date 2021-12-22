@@ -54,7 +54,7 @@ namespace TemplatePractice.Areas.Admin.Controllers
                 return View();
             }
             footer.Image = footer.File.FileName;
-            string path = Path.Combine(_env.WebRootPath, "img", footer.Image);
+            string path = Path.Combine(_env.WebRootPath, "img", Guid.NewGuid() + footer.Image);
             FileStream fileStream = new FileStream(path, FileMode.Create);
             await footer.File.CopyToAsync(fileStream);
             if (_context.Footers.FirstOrDefault()!=null)
@@ -74,6 +74,7 @@ namespace TemplatePractice.Areas.Admin.Controllers
             }
             
             await _context.SaveChangesAsync();
+            fileStream.Close();
             return View(nameof(Index),
                 new FooterIndexViewModel
                 {
@@ -128,13 +129,13 @@ namespace TemplatePractice.Areas.Admin.Controllers
                 return View();
             }
             footer.Image = footer.File.FileName;
-            string path = Path.Combine(_env.WebRootPath, "img", footer.Image);
+            string path = Path.Combine(_env.WebRootPath, "img", Guid.NewGuid()+footer.Image); ;
             FileStream fileStream = new FileStream(path, FileMode.Create);
             await footer.File.CopyToAsync(fileStream);
                 _context.Footers.FirstOrDefault().FacebookLink = footer.FacebookLink;
                 _context.Footers.FirstOrDefault().LinkedInLink = footer.LinkedInLink;
                 _context.Footers.FirstOrDefault().Image = footer.Image;
-            
+            fileStream.Close();
                 return View(await _context.Footers.FirstOrDefaultAsync());
         }
     }
