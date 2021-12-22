@@ -1,0 +1,30 @@
+﻿@model List<ExpertImage>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Expert Image Id</th>
+                <th>Expert Image Name</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ExpertImage image in Model)
+            {
+                <tr>
+                    <td>@image.Id</td>
+                    <td>@image.ImageName</td>
+                    <td>@image.PersonName</td>
+                    <td><img class="w-100 d-block" src="~/img/@image.ImageName"/></td>
+                    <td>
+                        <a class="btn btn-primary"  asp-route-id="@image.Id" asp-action="Update">Update</a>
+                        <a class="btn btn-danger" asp-action="Delete"  asp-route-id="@image.Id">Delete</a>
+                        <a class="btn btn-warning"  asp-action="Detail" asp-route-id="@image.Id">Detail</a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+

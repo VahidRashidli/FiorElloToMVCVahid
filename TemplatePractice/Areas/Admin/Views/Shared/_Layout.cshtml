@@ -193,12 +193,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-category" aria-expanded="false" aria-controls="ui-category">
                             <i class="mdi mdi-circle-outline menu-icon"></i>
                             <span class="menu-title">Category</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="ui-basic">
+                        <div class="collapse" id="ui-category">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" asp-controller="Category" asp-action="Create">New Category</a></li>
                                 <li class="nav-item"> <a class="nav-link" asp-controller="Category" asp-action="Index">Categories</a></li>
@@ -206,14 +206,27 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-slider" aria-expanded="false" aria-controls="ui-slider">
+                            <i class="mdi mdi-circle-outline menu-icon"></i>
+                            <span class="menu-title">Slider</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="ui-slider">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Slider" asp-action="Create">New Slider Image</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Slider" asp-action="Index">Images</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-layout" aria-expanded="false" aria-controls="ui-layout">
                             <i class="mdi mdi-circle-outline menu-icon"></i>
                             <span class="menu-title">Layout</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="ui-basic">
+                        <div class="collapse" id="ui-layout">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" asp-controller="Footer" asp-action="Create">Create new layout Links</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Footer" asp-action="Create">Create layout(img and links)</a></li>
                                 <li class="nav-item"> <a class="nav-link" asp-controller="Footer" asp-action="Index">Footer</a></li>
                             </ul>
                         </div>

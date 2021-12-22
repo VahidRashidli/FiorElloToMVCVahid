@@ -16,7 +16,7 @@
                     <td>@Html.Raw(category.Description)</td>
                     <td>
                         <a class="btn btn-primary" asp-controller="Category" asp-route-id="@category.Id" asp-action="Update">Update</a>
-                        <a class="btn btn-danger">Delete</a>
+                        <a class="btn btn-danger"  asp-action="Delete" asp-route-id="@category.Id">Delete</a>
                         <a class="btn btn-warning" asp-controller="Category" asp-action="Detail" asp-route-id="@category.Id">Detail</a>
                     </td>
                 </tr>

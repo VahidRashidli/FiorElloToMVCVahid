@@ -9,19 +9,19 @@
                         <form enctype="multipart/form-data" class="forms-sample" method="post" asp-controller="Footer" asp-action="Create">
                             <div class="form-group">
                                 <label asp-for="FacebookLink">Facebook Link</label>
-                                <input type="text" class="form-control" asp-for="FacebookLink" placeholder="FacebookLink">
+                                <input type="text" class="form-control" asp-for="FacebookLink" placeholder="FacebookLink" value="@Model.FacebookLink">
                             </div>
                             <div class="form-group">
                                 <label asp-for="LinkedInLink">LinkedIn Link</label>
-                                <input type="text" class="form-control" asp-for="LinkedInLink" placeholder="LinkedInLink">
+                                <input type="text" class="form-control" asp-for="LinkedInLink" placeholder="LinkedInLink" value="@Model.LinkedInLink">
                             </div>
                             <div class="form-group">
-                                <label asp-for="File">LinkedIn Link</label>
-                                <input type="file" class="form-control" asp-for="File" accept="image/*">
+                                <label asp-for="File" class="cursor-pointer bg-danger">Choose an image by clicking at me (the current image: @Model.Image)</label>
+                                <input type="file" class="form-control invisible" asp-for="File" accept="image/*">
                             </div>
 
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
-                            <button class="btn btn-light">Cancel</button>
+                            <button class="btn btn-light" asp-action="Index">Cancel</button>
                         </form>
                     </div>
                 </div>

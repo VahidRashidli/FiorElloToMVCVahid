@@ -50,6 +50,7 @@ namespace TemplatePractice.Areas.Admin.Controllers
             return View(await _context.Categories.FindAsync(id));
         }
         [HttpPost]
+        [ActionName("Update")]
         public async Task<IActionResult> Update(int id,Category category)
         {
             if (!ModelState.IsValid)
@@ -66,6 +67,24 @@ namespace TemplatePractice.Areas.Admin.Controllers
                 return NotFound();
             }
             _context.Categories.Update(category);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool isExist = await _context.Categories.AnyAsync(c=>c.Id==id);
+            if (!isExist)
+            {
+                return NotFound();
+            }
+
+            return View();
+        }
+        [ActionName("Delete")]
+        [HttpPost]
+        public async  Task<IActionResult> Delete(Category category)
+        {
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

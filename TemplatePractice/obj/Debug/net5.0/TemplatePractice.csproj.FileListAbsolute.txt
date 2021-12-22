@@ -324,3 +324,9 @@ C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahi
 C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\TemplatePractice.genruntimeconfig.cache
 C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\Shared\_ValidationScripts.cshtml.g.cs
 C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\Update.cshtml.g.cs
+C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\Delete.cshtml.g.cs
+C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\Slider\Index.cshtml.g.cs
+C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\Slider\Create.cshtml.g.cs
+C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\Footer\Delete.cshtml.g.cs
+C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\Slider\Delete.cshtml.g.cs
+C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\Footer\Update.cshtml.g.cs

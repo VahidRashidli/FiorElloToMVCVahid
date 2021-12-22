@@ -10,32 +10,35 @@
                         <ul class="list-unstyled mt-4">
                             @foreach (FooterCategorySection footerCategorySection in footerCategory.footerCategorySections)
                             {
-                            <li><a class="text-black-50" href="@footerCategorySection.Link">@footerCategorySection.Name</a></li>
+                                <li><a class="text-black-50" href="@footerCategorySection.Link">@footerCategorySection.Name</a></li>
                             }
-                              
-                            </ul>
+
+                        </ul>
                     </div>
                 </div>
             }
         </div>
 
         <hr>
+        @if (Model.Footer != null)
+        {
+            <div class="row py-2">
+                <div class=" col-lg-4 text-center text-lg-left">
+                    <p class="text-black-50">
+                        Powered by <a class="author text-muted"
+                                      href="https://www.bakhtiyar.az">Bakhtiyar Shamilzada</a> 2020
+                    </p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img src="~/img/@Model.Footer.Image" class="fluid" alt="">
+                </div>
+                <div class="col-lg-4 text-center text-lg-right mt-3 mt-lg-0">
+                    <a class="text-black-50 mr-5"
+                       href="@Model.Footer.LinkedInLink">LINKEDIN</a>
+                    <a class="text-black-50" href="@Model.Footer.FacebookLink">FACEBOOK</a>
+                </div>
+            </div>
+        }
 
-        <div class="row py-2">
-            <div class=" col-lg-4 text-center text-lg-left">
-                <p class="text-black-50">
-                    Powered by <a class="author text-muted"
-                                  href="https://www.bakhtiyar.az">Bakhtiyar Shamilzada</a> 2020
-                </p>
-            </div>
-            <div class="col-lg-4 text-center">
-                <img src="~/img/@Model.Footer.Image" class="fluid" alt="">
-            </div>
-            <div class="col-lg-4 text-center text-lg-right mt-3 mt-lg-0">
-                <a class="text-black-50 mr-5"
-                   href="@Model.Footer.LinkedInLink">LINKEDIN</a>
-                <a class="text-black-50" href="@Model.Footer.FacebookLink">FACEBOOK</a>
-            </div>
-        </div>
     </div>
 </footer>

@@ -1,0 +1,41 @@
+﻿@model ExpertImage
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Create a Category</h4>
+                        <form enctype="multipart/form-data" class="forms-sample" method="post" asp-controller="Slider" asp-action="Create">
+                            <div class="form-group">
+                                <label asp-for="PersonName">Person Name</label>
+                                <input type="text" class="form-control" asp-for="PersonName" placeholder="Person Name">
+                                <span class="text-danger" asp-validation-for="PersonName"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Profession">Profession </label>
+                                <input type="text" class="form-control" asp-for="Profession" placeholder="Profession">
+                                <span class="text-danger" asp-validation-for="Profession"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Order">Order </label>
+                                <input type="text" class="form-control" asp-for="Order" placeholder="Order">
+                                <span class="text-danger" asp-validation-for="Order"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" asp-for="File" accept="image/*" />
+                                <span class="text-danger" asp-validation-for="File"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScripts" />
+}
