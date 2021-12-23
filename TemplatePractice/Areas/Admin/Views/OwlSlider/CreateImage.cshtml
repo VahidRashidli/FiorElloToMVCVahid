@@ -1,0 +1,25 @@
+﻿@model OwlSliderImage
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Create an Owl Slider</h4>
+                            <form enctype="multipart/form-data" class="forms-sample" method="post" asp-action="CreateImage">
+                                <div class="form-group">
+                                    <label asp-for="File">Upload a slider image</label>
+                                    <input type="file" accept="image/*" asp-for="File"/>
+                                    <span class="text-danger" asp-validation-for="File"></span>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary me-2" >Submit</button>
+                                <button class="btn btn-light">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,26 @@
+﻿@model OwlSlider
+@if (Model != null && Model.Images!=null)
+{
+<section id="slider">
+    <div class="owl-carousel slider">
+        @foreach (OwlSliderImage image in Model.Images)
+        {
+            <div> <img src="~/img/@image.Image" alt=""> </div>
+        }
+        </div>
+        <div class="container context pl-lg-5 ml-lg-3">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="text">
+                        @Html.Raw(Model.Title)
+                        @Html.Raw(Model.Description)
+                    </div>
+                    <div class="img">
+                        <img src="~/img/@Model.Image" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+}
+

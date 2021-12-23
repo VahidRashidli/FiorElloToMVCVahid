@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TemplatePractice.Areas.Admin.Constants;
+using TemplatePractice.Areas.Admin.Utilities.File;
 using TemplatePractice.Areas.Admin.ViewModels;
 using TemplatePractice.DAL;
 using TemplatePractice.Models;
@@ -43,38 +45,40 @@ namespace TemplatePractice.Areas.Admin.Controllers
             {
                 return View();
             }
-            if (!footer.File.ContentType.Contains("image"))
+            if (!footer.File.CheckContent("image"))
             {
                 ModelState.AddModelError(nameof(Footer.File), "The file must be an image");
                 return View();
             }
-            if (footer.File.Length>1024*1000)
+            if (!footer.File.CheckFileSizeForGB())
             {
                 ModelState.AddModelError(nameof(Footer.File), "The file is too large");
                 return View();
             }
-            footer.Image = footer.File.FileName;
-            string path = Path.Combine(_env.WebRootPath, "img", Guid.NewGuid() + footer.Image);
-            FileStream fileStream = new FileStream(path, FileMode.Create);
-            await footer.File.CopyToAsync(fileStream);
+         
+            
             if (_context.Footers.FirstOrDefault()!=null)
             {
+                FileStreamDeleter.DeleteFileStream(
+                    FileNameConstants.Image,
+                    _context.Footers.FirstOrDefault().Image
+                    );
+                Guid guid = Guid.NewGuid();
+                footer.Image = guid + footer.File.FileName;
+                await FileStreamCreator.CreateFileStream(FileNameConstants.Image, footer.File, guid);
                 _context.Footers.FirstOrDefault().FacebookLink = footer.FacebookLink;
                 _context.Footers.FirstOrDefault().LinkedInLink = footer.LinkedInLink;
                 _context.Footers.FirstOrDefault().Image = footer.Image;
             }
             else
             {
-                await _context.Footers.AddAsync(new Footer
-                {
-                    FacebookLink = footer.FacebookLink,
-                    Image=footer.Image,
-                    LinkedInLink=footer.LinkedInLink
-                });
+                Guid guid = Guid.NewGuid();
+                footer.Image = guid + footer.File.FileName;
+                await FileStreamCreator.CreateFileStream(FileNameConstants.Image, footer.File, guid);
+                await _context.Footers.AddAsync(footer);
             }
             
             await _context.SaveChangesAsync();
-            fileStream.Close();
             return View(nameof(Index),
                 new FooterIndexViewModel
                 {
@@ -90,18 +94,16 @@ namespace TemplatePractice.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id,Footer footer)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id != footer.Id)
-            {
-                return BadRequest();
-            }
-            bool isExist =await _context.Footers.AnyAsync(f=>f.Id==footer.Id);
+           
+            bool isExist =await _context.Footers.AnyAsync(f=>f.Id==id);
             if (!isExist)
             {
                 return NotFound();
             }
-           
+            Footer footer = _context.Footers.Find(id);
+            FileStreamDeleter.DeleteFileStream(FileNameConstants.Image, footer.Image);
             _context.Footers.Remove(footer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -112,31 +114,36 @@ namespace TemplatePractice.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(Footer footer)
+        public async Task<IActionResult> Update(int id,Footer footer)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            if (!footer.File.ContentType.Contains("image"))
+            if (!footer.File.CheckContent("image"))
             {
                 ModelState.AddModelError(nameof(Footer.File), "The file must be an image");
                 return View();
             }
-            if (footer.File.Length > 1024 * 1000)
+            if (!footer.File.CheckFileSizeForGB())
             {
                 ModelState.AddModelError(nameof(Footer.File), "The file is too large");
                 return View();
             }
-            footer.Image = footer.File.FileName;
-            string path = Path.Combine(_env.WebRootPath, "img", Guid.NewGuid()+footer.Image); ;
-            FileStream fileStream = new FileStream(path, FileMode.Create);
-            await footer.File.CopyToAsync(fileStream);
-                _context.Footers.FirstOrDefault().FacebookLink = footer.FacebookLink;
-                _context.Footers.FirstOrDefault().LinkedInLink = footer.LinkedInLink;
-                _context.Footers.FirstOrDefault().Image = footer.Image;
-            fileStream.Close();
-                return View(await _context.Footers.FirstOrDefaultAsync());
+           
+            FileStreamDeleter.DeleteFileStream
+                (
+                FileNameConstants.Image,
+                footer.Image
+              );
+            Guid guid = Guid.NewGuid();
+            footer.Image = guid+footer.File.FileName;
+           await FileStreamCreator.CreateFileStream(FileNameConstants.Image,footer.File,guid);
+            _context.Footers.FirstOrDefault().FacebookLink = footer.FacebookLink;
+            _context.Footers.FirstOrDefault().LinkedInLink = footer.LinkedInLink;
+            _context.Footers.FirstOrDefault().Image = footer.Image;
+            await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
         }
     }
 }

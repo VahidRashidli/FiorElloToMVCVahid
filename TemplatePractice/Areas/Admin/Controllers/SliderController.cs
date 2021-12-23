@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TemplatePractice.DAL;
 using TemplatePractice.Models;
+using TemplatePractice.Areas.Admin.Utilities.File;
+using TemplatePractice.Areas.Admin.Constants;
 
 namespace TemplatePractice.Areas.Admin.Controllers
 {
@@ -17,7 +19,7 @@ namespace TemplatePractice.Areas.Admin.Controllers
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public SliderController(AppDbContext context, IWebHostEnvironment env)
+        public SliderController(AppDbContext context, IWebHostEnvironment env )
         {
             _context = context;
             _env = env;
@@ -40,23 +42,21 @@ namespace TemplatePractice.Areas.Admin.Controllers
             {
                 return View();
             }
-            if (!image.File.ContentType.Contains("image"))
+            if (!image.File.CheckContent("image"))
             {
                 ModelState.AddModelError(nameof(ExpertImage.File), "The file is not an image");
                 return View();
             }
-            if (image.File.Length>1024*1000)
+            if (!image.File.CheckFileSizeForGB())
             {
                 ModelState.AddModelError(nameof(ExpertImage.File), "The file is too large");
                 return View();
             }
-            image.ImageName = image.File.FileName;
-            string path = Path.Combine(_env.WebRootPath, "img",image.File.FileName);
-            FileStream fileStream = new FileStream(path,FileMode.Create);
-            await image.File.CopyToAsync(fileStream);
+            Guid guid = Guid.NewGuid();
+            image.ImageName = guid+image.File.FileName;
+            await FileStreamCreator.CreateFileStream(FileNameConstants.Image,image.File, guid);
             await _context.ExpertImages.AddAsync(image);
-           await  _context.SaveChangesAsync();
-            fileStream.Close();
+            await  _context.SaveChangesAsync();
             return View(nameof(Index),await _context.ExpertImages.ToListAsync());
         }
         public async Task<IActionResult>Delete(int id)
@@ -70,12 +70,15 @@ namespace TemplatePractice.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id , ExpertImage expertImage)
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteSlider(int id)
         {
+            ExpertImage expertImage = await _context.ExpertImages.FindAsync(id);
             if (id!=expertImage.Id)
             {
                 return BadRequest();
             }
+            FileStreamDeleter.DeleteFileStream(FileNameConstants.Image, expertImage.ImageName);
             _context.ExpertImages.Remove(expertImage);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TemplatePractice.Models;
 
 namespace TemplatePractice.DAL
 {
-    public class AppDbContext:DbContext,IAppDbContext
+    public class AppDbContext:IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext>options):base(options)
         {
@@ -28,5 +29,7 @@ namespace TemplatePractice.DAL
         public DbSet<SaySection> SaySections { get; set; }
         public DbSet<InstagramSection> InstagramSections { get; set; }
         public DbSet<InstagramSectionPicture> InstagramSectionPictures { get; set; }
+        public DbSet<OwlSlider> OwlSliders { get; set; }
+        public DbSet<OwlSliderImage> OwlSliderImages { get; set; }
     }
 }

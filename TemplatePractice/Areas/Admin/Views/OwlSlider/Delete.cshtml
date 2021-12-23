@@ -1,0 +1,29 @@
+﻿@model OwlSlider
+@if (Model.Images.Count>0)
+{
+    <span class="text-danger">@TempData["Info"]</span>
+}
+else
+{
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Delete layout img and links</h4>
+                            <form class="forms-sample" method="post" asp-action="Delete">
+                                <div class="form-group">
+                                    <span class="text-danger">Are your sure that you want to delete?</span>
+                                    <button class="btn btn-danger"  asp-route-id="@Model.Id">Delete</button>
+                                    <button class="btn btn-warning" asp-action="Index">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

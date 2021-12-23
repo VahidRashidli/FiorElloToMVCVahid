@@ -1,0 +1,70 @@
+﻿@model OwlSlider
+@if (Model != null)
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Owl Slider Id</th>
+                    <th>Owl Slider Title</th>
+                    <th>Owl Slider Description</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>@Model.Id</td>
+                    <td>@Html.Raw(Model.Title)</td>
+                    <td>@Html.Raw(Model.Description)</td>
+                    <td>
+                        <div class="wrapper">
+                            <img class="w-100 d-block" src="~/img/@Model.Image" />
+                        </div>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Update">Update</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-action="Detail">Detail</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Images.Count>0)
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Owl Slider Images</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (OwlSliderImage image in Model.Images)
+                    {
+                        <tr>
+                            <td>
+                                <div class="wrapper">
+                                    <img class="w-100 d-block" src="~/img/@image.Image" />
+                                </div>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" asp-action="UpdateSliderImage">Update</a>
+                                <a class="btn btn-danger" asp-action="DeleteSliderImage" asp-route-id="@image.Id">Delete</a>
+                                <a class="btn btn-warning" asp-action="DetailSliderImage">Detail</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+
+
+}

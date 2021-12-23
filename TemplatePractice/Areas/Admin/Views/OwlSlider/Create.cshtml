@@ -1,0 +1,67 @@
+﻿@model OwlSliderCreateViewModel
+@if (Model!=null&&Model.OwlSlider != null)
+{
+    <span class="text-danger">@ViewData["Info"]</span>
+}
+else
+{
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Create an Owl Slider</h4>
+                        <form enctype="multipart/form-data" class="forms-sample" method="post" asp-action="Create">
+                            <div class="form-group">
+                                <label asp-for="OwlSlider.Title">Title</label>
+                                <textarea asp-for="OwlSlider.Title" id="Title"></textarea>
+                                <span class="text-danger" asp-validation-for="OwlSlider.Title"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="OwlSlider.Description">Description</label>
+                                <textarea asp-for="OwlSlider.Description" id="Description"></textarea>
+                                <span class="text-danger" asp-validation-for="OwlSlider.Description"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="OwlSlider.File">Upload a slider top image</label>
+                                <input type="file" asp-for="OwlSlider.File" accept="image/*" />
+                                <span class="text-danger" asp-validation-for="OwlSlider.File"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="OwlSliderImage.File">Upload a slider image</label>
+                                <input type="file" asp-for="OwlSliderImage.File" accept="image/*" />
+                                <span class="text-danger" asp-validation-for="OwlSliderImage.File"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScripts" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Title'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}
+}
