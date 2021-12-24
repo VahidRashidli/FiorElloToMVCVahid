@@ -1,0 +1,31 @@
+﻿@model OwlSlider
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Owl Slider Id</th>
+                <th>Owl Slider Title</th>
+                <th>Owl Slider Description</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Html.Raw(Model.Title)</td>
+                <td>@Html.Raw(Model.Description)</td>
+                <td>
+                    <div class="wrapper">
+                        <img class="w-100 d-block" style="object-fit: contain" src="~/img/@Model.Image" />
+                    </div>
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Update">Update</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

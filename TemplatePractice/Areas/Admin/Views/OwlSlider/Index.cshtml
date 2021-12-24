@@ -54,9 +54,9 @@
                                 </div>
                             </td>
                             <td>
-                                <a class="btn btn-primary" asp-action="UpdateSliderImage">Update</a>
+                                <a class="btn btn-primary" asp-action="UpdateSliderImage" asp-route-id="@image.Id">Update</a>
                                 <a class="btn btn-danger" asp-action="DeleteSliderImage" asp-route-id="@image.Id">Delete</a>
-                                <a class="btn btn-warning" asp-action="DetailSliderImage">Detail</a>
+                                <a class="btn btn-warning" asp-action="DetailSliderImage" asp-route-id="@image.Id">Detail</a>
                             </td>
                         </tr>
                     }

@@ -50,11 +50,12 @@ namespace TemplatePractice.Areas.Admin.Controllers
             {
                 return View();
             }
-            if (viewModel.OwlSlider.File==null)
+            if (viewModel.OwlSlider.File == null)
             {
                 ModelState.AddModelError(nameof(OwlSlider), "You must upload a file");
                 return View();
             }
+
             if (viewModel.OwlSliderImage == null)
             {
                 ModelState.AddModelError(nameof(OwlSliderImage), "You must upload a slider image");
@@ -115,6 +116,11 @@ namespace TemplatePractice.Areas.Admin.Controllers
             {
                 return View();
             }
+            if (owlSliderImage.File==null)
+            {
+                ModelState.AddModelError(nameof(OwlSliderImage.File), "You must upload a an image");
+                return View();
+            }
             if (!owlSliderImage.File.CheckContent("image"))
              {
                 ModelState.AddModelError(nameof(OwlSliderImage.File), "The file must be an image");
@@ -132,6 +138,86 @@ namespace TemplatePractice.Areas.Admin.Controllers
             await _context.OwlSliderImages.AddAsync(owlSliderImage);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> UpdateSliderImage(int id)
+        {
+            return View(await _context.OwlSliderImages.FindAsync(id));
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateSliderImage(int id,OwlSliderImage slideImage)
+        {
+            if (id!=slideImage.Id)
+            {
+                return BadRequest();
+            }
+            if (slideImage.File!=null)
+            {
+                if (!slideImage.File.CheckContent("image"))
+                {
+                    ModelState.AddModelError(nameof(OwlSliderImage.File), "The file must be an image");
+                    return View();
+                }
+                if (!slideImage.File.CheckFileSizeForGB())
+                {
+                    ModelState.AddModelError(nameof(OwlSliderImage.File), "The file is too large");
+                    return View();
+                }
+                FileStreamDeleter.DeleteFileStream(FileNameConstants.Image, slideImage.Image);
+                Guid guid = Guid.NewGuid();
+                await FileStreamCreator.CreateFileStream(FileNameConstants.Image, slideImage.File, guid);
+                slideImage.Image = guid+slideImage.File.FileName;
+                _context.OwlSliderImages.Update(slideImage);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+            
+        }
+        public async Task<IActionResult> Update()
+        {
+            return View(await _context.OwlSliders.FirstOrDefaultAsync());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int id , OwlSlider owlSlider)
+        {
+            if (id!=owlSlider.Id)
+            {
+                return BadRequest();
+            }
+            if (!await _context.OwlSliders.AnyAsync(s=>s.Id==id))
+            {
+                return NotFound();
+            }
+            if (owlSlider.File!=null)
+            {
+                if (!owlSlider.File.CheckContent("image"))
+                {
+                    ModelState.AddModelError(nameof(OwlSlider.File), "The file must be an image");
+                    return View();
+                }
+                if (!owlSlider.File.CheckFileSizeForGB())
+                {
+                    ModelState.AddModelError(nameof(OwlSlider.File), "The file is too large");
+                    return View();
+                }
+                Guid guid = Guid.NewGuid();
+                FileStreamDeleter.DeleteFileStream(FileNameConstants.Image, owlSlider.Image);
+                await FileStreamCreator.CreateFileStream(FileNameConstants.Image, owlSlider.File, guid);
+                owlSlider.Image = guid + owlSlider.File.FileName;
+            }
+            _context.OwlSliders.Update(owlSlider);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Detail()
+        {
+            return View(await _context.OwlSliders.FirstOrDefaultAsync());
+        }
+        public async Task<IActionResult> DetailSliderImage(int id)
+        {
+            return View(await _context.OwlSliderImages.FindAsync(id));
         }
         public async Task<IActionResult> Delete(int id)
         {

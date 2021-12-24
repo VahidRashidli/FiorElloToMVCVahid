@@ -1,0 +1,25 @@
+﻿@model OwlSliderImage
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Update the Layout (Links)</h4>
+                        <form enctype="multipart/form-data" class="forms-sample" method="post" asp-action="UpdateSliderImage">
+                            <div class="form-group">
+                                <label asp-for="File">Update a slider image</label>
+                                <input type="file" accept="image/*" asp-for="File"/>
+                                <span class="text-danger" asp-validation-for="File"></span>
+                                <input type="hidden" value="@Model.Image" asp-for="Image"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary me-2" asp-route-id="@Model.Id">Submit</button>
+                            <button class="btn btn-light" asp-action="Index">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

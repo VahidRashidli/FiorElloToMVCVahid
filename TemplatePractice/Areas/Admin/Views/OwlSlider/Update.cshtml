@@ -1,0 +1,56 @@
+﻿@model OwlSlider
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Update the Layout (Links)</h4>
+                        <form enctype="multipart/form-data" class="forms-sample" method="post" asp-action="Update">
+                            <div class="form-group">
+                                <label asp-for="Title">Title</label>
+                                <textarea asp-for="Title" value="@Model.Title"></textarea>
+                                <span class="text-danger" asp-validation-for="Title"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description">Title</label>
+                                <textarea asp-for="Description" value="@Model.Description"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="File">Title</label>
+                                <input type="file" accept="image/*" asp-for="File"/>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                                <input type="hidden" asp-for="Image" value="@Model.Image"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary me-2"  asp-route-id="@Model.Id" >Submit</button>
+                            <button class="btn btn-light" asp-action="Index">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScripts" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Title'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}
