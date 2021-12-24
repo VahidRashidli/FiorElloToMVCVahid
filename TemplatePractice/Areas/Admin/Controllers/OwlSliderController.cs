@@ -50,6 +50,16 @@ namespace TemplatePractice.Areas.Admin.Controllers
             {
                 return View();
             }
+            if (viewModel.OwlSlider.File==null)
+            {
+                ModelState.AddModelError(nameof(OwlSlider), "You must upload a file");
+                return View();
+            }
+            if (viewModel.OwlSliderImage == null)
+            {
+                ModelState.AddModelError(nameof(OwlSliderImage), "You must upload a slider image");
+                return View();
+            }
             if (!viewModel.OwlSlider.File.CheckContent("image"))
             {
                 ModelState.AddModelError(nameof(OwlSlider.File), "The file must be an image");
@@ -93,7 +103,7 @@ namespace TemplatePractice.Areas.Admin.Controllers
             OwlSlider owlSlider = await _context.OwlSliders.FirstOrDefaultAsync();
             if (owlSlider==null)
             {
-                ViewData["Info"] = "First you need to create an owl slider";
+                ViewBag.Info = "First you need to create an owl slider";
             }
             return View();
         }
@@ -106,7 +116,7 @@ namespace TemplatePractice.Areas.Admin.Controllers
                 return View();
             }
             if (!owlSliderImage.File.CheckContent("image"))
-            {
+             {
                 ModelState.AddModelError(nameof(OwlSliderImage.File), "The file must be an image");
                 return View();
             }
