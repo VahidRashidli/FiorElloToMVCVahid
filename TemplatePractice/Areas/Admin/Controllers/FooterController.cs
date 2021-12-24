@@ -45,6 +45,11 @@ namespace TemplatePractice.Areas.Admin.Controllers
             {
                 return View();
             }
+            if (footer.File==null)
+            {
+                ModelState.AddModelError(nameof(Footer.File), "You must opload an image");
+                return View();
+            }
             if (!footer.File.CheckContent("image"))
             {
                 ModelState.AddModelError(nameof(Footer.File), "The file must be an image");
@@ -120,17 +125,18 @@ namespace TemplatePractice.Areas.Admin.Controllers
             {
                 return View();
             }
-            if (!footer.File.CheckContent("image"))
+            if (footer.File!=null)
             {
-                ModelState.AddModelError(nameof(Footer.File), "The file must be an image");
-                return View();
-            }
-            if (!footer.File.CheckFileSizeForGB())
-            {
-                ModelState.AddModelError(nameof(Footer.File), "The file is too large");
-                return View();
-            }
-           
+                if (!footer.File.CheckContent("image"))
+                {
+                    ModelState.AddModelError(nameof(Footer.File), "The file must be an image");
+                    return View();
+                }
+                if (!footer.File.CheckFileSizeForGB())
+                {
+                    ModelState.AddModelError(nameof(Footer.File), "The file is too large");
+                    return View();
+                }
             FileStreamDeleter.DeleteFileStream
                 (
                 FileNameConstants.Image,
@@ -139,6 +145,7 @@ namespace TemplatePractice.Areas.Admin.Controllers
             Guid guid = Guid.NewGuid();
             footer.Image = guid+footer.File.FileName;
            await FileStreamCreator.CreateFileStream(FileNameConstants.Image,footer.File,guid);
+            }
             _context.Footers.FirstOrDefault().FacebookLink = footer.FacebookLink;
             _context.Footers.FirstOrDefault().LinkedInLink = footer.LinkedInLink;
             _context.Footers.FirstOrDefault().Image = footer.Image;
