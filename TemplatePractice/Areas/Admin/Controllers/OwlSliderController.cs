@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TemplatePractice.Areas.Admin.Constants;
@@ -110,32 +111,38 @@ namespace TemplatePractice.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateImage(OwlSliderImage owlSliderImage)
+        public async Task<IActionResult> CreateImage(SliderImageCreateViewModel sliderImage)
         {
-            if (!ModelState.IsValid)
+            if (sliderImage.Files==null)
             {
+                ModelState.AddModelError(
+                    nameof(SliderImageCreateViewModel.Files),
+                    "You need to upload at least one image");
                 return View();
             }
-            if (owlSliderImage.File==null)
+            foreach(IFormFile file in sliderImage.Files) 
             {
-                ModelState.AddModelError(nameof(OwlSliderImage.File), "You must upload a an image");
-                return View();
-            }
-            if (!owlSliderImage.File.CheckContent("image"))
+                
+            if (!file.CheckContent("image"))
              {
-                ModelState.AddModelError(nameof(OwlSliderImage.File), "The file must be an image");
+                ModelState.AddModelError(nameof(SliderImageCreateViewModel.Files)
+                    , "The file must be an image");
                 return View();
             }
-            if (!owlSliderImage.File.CheckFileSizeForGB())
+            if (!file.CheckFileSizeForGB())
             {
-                ModelState.AddModelError(nameof(OwlSliderImage.File), "The file is too large");
+                ModelState.AddModelError(nameof(SliderImageCreateViewModel.Files),
+                    "The file is too large");
                 return View();
             }
+             OwlSliderImage owlSliderImage = new OwlSliderImage();
+             owlSliderImage.File = file;
             Guid guid = Guid.NewGuid();
             await FileStreamCreator.CreateFileStream(FileNameConstants.Image, owlSliderImage.File, guid);
             owlSliderImage.Image = guid + owlSliderImage.File.FileName;
             owlSliderImage.slider = await _context.OwlSliders.FirstOrDefaultAsync();
             await _context.OwlSliderImages.AddAsync(owlSliderImage);
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

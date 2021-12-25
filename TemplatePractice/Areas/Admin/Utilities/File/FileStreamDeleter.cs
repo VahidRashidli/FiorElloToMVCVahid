@@ -17,7 +17,6 @@ namespace TemplatePractice.Areas.Admin.Utilities.File
             {
                 System.IO.File.Delete(path);
             }
-            
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model OwlSliderImage
+﻿@model SliderImageCreateViewModel
 @if (ViewBag.Info == "First you need to create an owl slider")
 {
 <span class="text-danger">First you need to create an owl slider</span>
@@ -14,9 +14,9 @@ else
                             <h4 class="card-title">Create an Owl Slider</h4>
                             <form enctype="multipart/form-data" class="forms-sample" method="post" asp-action="CreateImage">
                                 <div class="form-group">
-                                    <label asp-for="File">Upload a slider image</label>
-                                    <input type="file" accept="image/*" asp-for="File"/>
-                                    <span class="text-danger" asp-validation-for="File"></span>
+                                    <label asp-for="Files">Upload a slider image</label>
+                                    <input type="file" multiple accept="image/*" asp-for="Files"/>
+                                    <span class="text-danger" asp-validation-for="Files"></span>
                                 </div>
                                 
                                 <button type="submit" class="btn btn-primary me-2" >Submit</button>
