@@ -88,5 +88,13 @@ namespace TemplatePractice.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Search(string searchedStr)
+        {
+            return Json(
+                string.IsNullOrWhiteSpace(searchedStr)?
+                await _context.Categories.ToListAsync():
+                _context.Categories.Where(c=>c.Name.Contains(searchedStr))
+                );
+        }
     }
 }

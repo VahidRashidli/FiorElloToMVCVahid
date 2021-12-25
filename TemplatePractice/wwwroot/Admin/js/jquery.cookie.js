@@ -5,6 +5,32 @@
  * Copyright 2013 Klaus Hartl
  * Released under the MIT license
  */
+$(document).on("keyup", "#input-search", (e) =>
+{
+	let val = e.target.value;
+	$.ajax({
+		method: "GET",
+		url: "search?searchedStr=" + val,
+		success: function (response) {
+			$("#searchWrapper").find("tbody").empty();
+			let result;
+			for (let category of response) {
+				console.log(category.id)
+				result += `<tr>
+                            <td>${category.id}</td>
+                            <td>${category.name}</td>
+                            <td>${category.description})</td>
+                            <td>
+                                <a class="btn btn-primary" href="/Admin/Category/Update/${category.id}">Update</a>
+                                <a class="btn btn-danger" href="/Admin/Category/Delete/${category.id}">Delete</a>
+                                <a class="btn btn-warning" href="/Admin/Category/Detail/${category.id}">Detail</a>
+                            </td>
+                        </tr>`;
+			}
+			$("#searchWrapper").find("tbody").html(result);
+		}
+    })
+});
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD
