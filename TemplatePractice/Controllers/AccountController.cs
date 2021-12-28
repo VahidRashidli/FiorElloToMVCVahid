@@ -6,21 +6,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TemplatePractice.DAL;
 using TemplatePractice.Models;
+using TemplatePractice.ViewModels;
 
 namespace TemplatePractice.Controllers
 {
     public class AccountController:Controller
     {
-        private readonly AppDbContext _context;
         private readonly UserManager<User> _usermanager;
-
-        
-        public AccountController(AppDbContext context, UserManager<User> usermanager)
+        public AccountController( UserManager<User> usermanager)
         {
-            _context = context;
             _usermanager = usermanager;
         }
-
         public  IActionResult Login(User user)
         {
             return View();
@@ -31,16 +27,24 @@ namespace TemplatePractice.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(User user)
+        public async Task<IActionResult> Register(RegisterViewModel user)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
+            var dbUser = await _usermanager.FindByNameAsync(user.UserName);
+            if (dbUser!=null)
+            {
+                ModelState.AddModelError(nameof(RegisterViewModel.UserName),
+                    "This username already exists in the database");
+            }
             var result =await _usermanager.CreateAsync(
-                new User() { UserName=user.UserName,
+                new User() { 
+                UserName=user.UserName,
                 Email=user.Email,
-                },user.PasswordHash
+                FullName=user.FullName,
+                },user.Password
                 ); 
             if (!result.Succeeded)
             {
@@ -51,7 +55,6 @@ namespace TemplatePractice.Controllers
                 return View();
              
             }
-            
             return RedirectToAction(nameof(HomeController.Index),"Home");
         }
     }

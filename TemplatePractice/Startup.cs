@@ -42,7 +42,7 @@ namespace TemplatePractice
             });
             services.AddIdentity<User, IdentityRole>(options =>
             {
-
+                options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             FileNameConstants.Image = Path.Combine(_env.WebRootPath, "img");
         }

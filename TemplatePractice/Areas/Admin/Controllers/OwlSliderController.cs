@@ -135,9 +135,11 @@ namespace TemplatePractice.Areas.Admin.Controllers
                     "The file is too large");
                 return View();
             }
-             OwlSliderImage owlSliderImage = new OwlSliderImage();
-             owlSliderImage.File = file;
-            Guid guid = Guid.NewGuid();
+                OwlSliderImage owlSliderImage = new OwlSliderImage
+                {
+                    File = file
+                };
+                Guid guid = Guid.NewGuid();
             await FileStreamCreator.CreateFileStream(FileNameConstants.Image, owlSliderImage.File, guid);
             owlSliderImage.Image = guid + owlSliderImage.File.FileName;
             owlSliderImage.slider = await _context.OwlSliders.FirstOrDefaultAsync();
