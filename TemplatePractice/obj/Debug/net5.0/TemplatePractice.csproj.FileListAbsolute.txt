@@ -346,3 +346,4 @@ C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahi
 C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\OwlSlider\Detail.cshtml.g.cs
 C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Areas\Admin\Views\OwlSlider\DetailSliderImage.cshtml.g.cs
 C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\User\OneDrive\Рабочий стол\C#Practise\Work\FiorElloToMVCVahid\TemplatePractice\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs

@@ -29,10 +29,8 @@ namespace TemplatePractice
             _config = configuration;
             _env = env;
         }
-
         public void ConfigureServices(IServiceCollection services)
         {
-           
             services.AddMvc().AddNewtonsoftJson(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 }
@@ -46,8 +44,6 @@ namespace TemplatePractice
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             FileNameConstants.Image = Path.Combine(_env.WebRootPath, "img");
         }
-
-
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -56,7 +52,7 @@ namespace TemplatePractice
             }
            
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

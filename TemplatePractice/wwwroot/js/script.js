@@ -11,7 +11,6 @@ $(document).ready(function () {
             success: function (res) {
                 $(".search__container li:not(:first-child)").detach()
                 $(".search__container").append(res);
-                
             }
         }
 
