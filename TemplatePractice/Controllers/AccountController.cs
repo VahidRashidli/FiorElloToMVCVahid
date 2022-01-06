@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TemplatePractice.Areas.Admin.Constants;
 using TemplatePractice.DAL;
 using TemplatePractice.Models;
 using TemplatePractice.ViewModels;
@@ -14,7 +16,7 @@ namespace TemplatePractice.Controllers
     {
         private readonly UserManager<User> _usermanager;
         public readonly SignInManager<User> _signIn;
-        public AccountController( UserManager<User> usermanager, SignInManager<User> signIn)
+        public AccountController(UserManager<User> usermanager, SignInManager<User> signIn)
         {
             _usermanager = usermanager;
             _signIn = signIn;
@@ -25,6 +27,7 @@ namespace TemplatePractice.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(AccountLoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -55,11 +58,13 @@ namespace TemplatePractice.Controllers
             }
             if (!signInResult.Succeeded)
             {
+                ModelState.AddModelError("", "Invalid Credentials");
                 return View();
             }
             
             return RedirectToAction(nameof(HomeController.Index),"Home");
         }
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signIn.SignOutAsync();
@@ -99,6 +104,7 @@ namespace TemplatePractice.Controllers
                 }
                 return View();
             }
+           await _usermanager.AddToRoleAsync(user, RoleConstants.User);
             await _signIn.SignInAsync(user, true);
             return RedirectToAction(nameof(HomeController.Index),"Home");
         }

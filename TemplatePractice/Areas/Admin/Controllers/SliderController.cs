@@ -10,10 +10,12 @@ using TemplatePractice.DAL;
 using TemplatePractice.Models;
 using TemplatePractice.Areas.Admin.Utilities.File;
 using TemplatePractice.Areas.Admin.Constants;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TemplatePractice.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = RoleConstants.Admin + "," + RoleConstants.Moderator)]
     public class SliderController : Controller
     {
         private readonly AppDbContext _context;

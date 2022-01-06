@@ -1,0 +1,39 @@
+﻿@model List<UserViewModel>
+<div id="searchWrapper">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>FullName</th>
+                    <th>Email</th>
+                    <th>UserName</th>
+                    <th>Roles</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (UserViewModel user in Model)
+                {
+                    <tr>
+                        <td>@user.FullName</td>
+                        <td>@user.Email</td>
+                        <td>@user.UserName</td>
+                        <td>
+                        <select>
+                            @foreach(string role in user.RoleNames)
+                {
+                    <option>@role</option>
+                }
+                            </select></td>
+                        <td>
+                            <a class="btn btn-primary">Update</a>
+                            <a class="btn btn-danger">Delete</a>
+                            <a class="btn btn-warning">Detail</a>
+                            <a class="btn btn-warning" asp-action="AddRole" asp-route-id="@user.Id">Add Role</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,46 @@
+﻿@model AddRoleViewModel
+<div id="searchWrapper">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>FullName</th>
+                    <th>Email</th>
+                    <th>UserName</th>
+                    <th>Roles</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>@Model.User.FullName</td>
+                    <td>@Model.User.Email</td>
+                    <td>@Model.User.UserName</td>
+                    <td>
+                        <select>
+                            @foreach (string role in Model.User.RoleNames)
+                            {
+                                <option>@role</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <form class="form" asp-action="AddRole" method="post">
+            <select asp-for="Role">
+                <option selected disabled>Which Role to add?</option>
+                @foreach (IdentityRole role in Model.Roles)
+                {
+                    @if (!Model.User.RoleNames.Any(r=>r==role.Name))
+                    {
+                        <option>@role.Name</option>
+                    }
+                }
+            </select>
+            <input type="submit" class="btn btn-primary" asp-route-id="@Model.User.Id">
+            <a class="btn btn-danger" asp-action="Index">Cancel</a>
+        </form>
+    </div>
+</div>
+

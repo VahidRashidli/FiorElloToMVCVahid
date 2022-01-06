@@ -36,7 +36,10 @@ namespace TemplatePractice
                 }
             );
             services.AddDbContext<AppDbContext>(options => {
-                options.UseSqlServer(_config.GetConnectionString("Default"));
+                options.UseSqlServer(_config.GetConnectionString("Default")
+                    , builder => {
+                        builder.MigrationsAssembly(nameof(TemplatePractice));
+                    });
             });
             services.AddIdentity<User, IdentityRole>(options =>
             {
@@ -54,6 +57,8 @@ namespace TemplatePractice
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseRouting();
+            app.UseAuthorization();
+            app.Seed();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
