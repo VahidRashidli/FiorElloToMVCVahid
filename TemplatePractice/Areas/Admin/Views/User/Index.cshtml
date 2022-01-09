@@ -29,6 +29,8 @@
                             <a class="btn btn-danger">Delete</a>
                             <a class="btn btn-warning">Detail</a>
                             <a class="btn btn-warning" asp-action="AddRole" asp-route-id="@user.Id">Add Role</a>
+                            <a class="btn btn-warning" asp-action="ChangePassword" asp-route-id="@user.Id">Change Password</a>
+                            <a class="btn btn-warning" asp-action="BlockUser" asp-route-id="@user.Id">Block User</a>
                         </td>
                     </tr>
                 }

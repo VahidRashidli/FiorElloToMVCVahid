@@ -56,12 +56,16 @@ namespace TemplatePractice.Controllers
             {
                 signInResult = await _signIn.PasswordSignInAsync(user, model.Password, false, false);
             }
+            if (signInResult.IsLockedOut)
+            {
+                ModelState.AddModelError("", "The user is blocked");
+                return View();
+            }
             if (!signInResult.Succeeded)
             {
                 ModelState.AddModelError("", "Invalid Credentials");
                 return View();
             }
-            
             return RedirectToAction(nameof(HomeController.Index),"Home");
         }
         [Authorize]

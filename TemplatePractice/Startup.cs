@@ -46,6 +46,10 @@ namespace TemplatePractice
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             FileNameConstants.Image = Path.Combine(_env.WebRootPath, "img");
+            services.Configure<SecurityStampValidatorOptions>(options=> 
+            {
+                options.ValidationInterval = TimeSpan.FromSeconds(0);
+            });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
